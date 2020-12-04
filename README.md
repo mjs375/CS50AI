@@ -1,6 +1,7 @@
 # CS50AI
-Course notes and projects for CS50: Artificial Intelligence with Python
-   Matthew James Spitzer
+- Course notes and projects for **CS50: Artificial Intelligence with Python**
+  - *Matthew James Spitzer*
+- *Note: these projects are posted for my own personal use only. Any student looking to borrow code should remember the course's Academic Honesty Policy and reconsider looking further at the source-code. It is worth more to you to learn programming the hard way than to cheat!*
 
 
 

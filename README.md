@@ -4,7 +4,6 @@ Course notes and projects for CS50: Artificial Intelligence with Python
 
 
 
-
 № | Subject | Project | Description  | Video | Code
 -----|---------|---------|--------------|------------|------
 0a | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | ⏳ | ⏳ 

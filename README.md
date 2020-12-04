@@ -16,6 +16,6 @@ Course notes and projects for CS50: Artificial Intelligence with Python
 3a | *Optimization* | **[Crossword]()** | *An AI that generates crossword puzzles.*
 4a | *Learning* | **[Shopping](https://cs50.harvard.edu/ai/2020/projects/4/shopping/)** | *AI predicts whether online shopping customers will complete a purchase.* | 
 4b | *Learning* | **[Nim](https://cs50.harvard.edu/ai/2020/projects/4/nim/)** | *AI that teaches itself to play Nim through reinforcement learning.* | 
-5a | *Neural Networks* | **[Traffic](https://cs50.harvard.edu/ai/2020/projects/5/traffic/)**
+5a | *Neural Networks* | **[Traffic](https://cs50.harvard.edu/ai/2020/projects/5/traffic/)** | *An AI that identifies which traffic signs are in a given photograph.*
 6a | *Language* | **[Parser](https://cs50.harvard.edu/ai/2020/projects/6/parser/)** | *An AI to parse and extract noun phrases from sentences.*
 6b | *Language* | **[Questions](https://cs50.harvard.edu/ai/2020/projects/6/questions/)** | *An AI that answers questions.* | 

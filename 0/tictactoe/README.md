@@ -6,6 +6,9 @@
 - **Run Program:**
   - ```$ python3 runner.py```
     - Plays against AI. (Since Tic-Tac-Toe is a tie given optimal play by both sides, you should never be able to win, though you can lose.)
+- **Run TicTacToe tests:**
+  - ```$ python3 test.py```
+    - *Complete suite of tests for all file functions.*
 
 #### Files
 - requirements.txt: *installs pygame*

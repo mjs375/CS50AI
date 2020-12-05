@@ -87,6 +87,12 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
+    """
+    An easier (for horizontal... ) check would be like:
+    for i, row in enumerate(board):
+        if len(set(row)) == 1 and row[1] != EMPTY:
+            # easy!
+    """
     #--All Possible win conditions (for either piece)
         #--Notice win conditions ignore a) adversary's pieces and b) your own irrelevant pieces (".")
     wins = [
@@ -133,16 +139,35 @@ def winner(board):
 
 def terminal(board):
     """
-    Returns True if game is over, False otherwise.
+    Returns True if game is over (winner or tie), False otherwise.
     """
-    raise NotImplementedError
+    #--Has the game been won?
+    check = winner(board)
+    if check == X or check == O:
+        return True
+    #--Check if remaining cells (if not, a tie, game over):
+        #--TODO (better): simply call actions(board) and if returned set is empty...
+    for row in board:
+        for cell in row:
+            if cell == EMPTY:
+                return False # Game goes on!
+    return True #--All cells are occupied, it's a tie.
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 def utility(board):
     """
-    Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
+    Returns 1 if X has won the game, -1 if O has won, 0 for tie. Only called when terminal(board) is True (game over).
     """
-    raise NotImplementedError
+    champ = winner(board)
+    if champ == X:
+        return 1
+    elif champ == O:
+        return -1
+    else: #--Tie:
+        return 0
 
 
 def minimax(board):

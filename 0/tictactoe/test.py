@@ -7,8 +7,15 @@ from tictactoe import player, actions, result, winner, terminal, utility, minima
 
 - PlayerTestCase: tests for which player's turn it is– player().
 - ActionsTestCase: tests for which moves are legal and available– actions().
-– ResultTestCase: tests for legal (new board returned) and illegal moves(exception raised).
-– WinnerTestCase: TODO
+– ResultTestCase: tests for legal (new board returned) and illegal moves(exception raised) –result().
+– WinnerTestCase: tests who is winner of the game– winner().
+- TerminalTestCase: tests whether game is won/tied, or still going– terminal().
+- UtilityTestCase: tests game utility output (score)– utility().
+– MinimaxTestCase: tests optimal move finder– minimax().
+
+
+- To run a single test:
+    $ python3 test.py CommonTest.test_name
 
 """
 
@@ -42,10 +49,6 @@ class CommonTest(unittest.TestCase):
                 c += 1
         return board
 
-
-
-
-
 #
 # #
 #
@@ -72,10 +75,6 @@ class PlayerTestCase(CommonTest):
         board = self.create_board(".........")
         self.assertEqual(player(board), self.X, "X should go first!")
 
-
-
-
-
 #
 # #
 #
@@ -101,8 +100,9 @@ class ActionsTestCase(CommonTest):
         board = self.create_board("..X.....O")
         self.assertEqual(actions(board),{(0,0),(0,1),(1,0),(1,1),(1,2),(2,0),(2,1)}, "Seven legal moves.")
 
-
-
+#
+# #
+#
 class ResultTestCase(CommonTest):
     """ Applies a legal move to a board and returns consequent board. """
     #
@@ -116,34 +116,85 @@ class ResultTestCase(CommonTest):
         action = (0,0)
         self.assertRaises(Exception, result, board, action, "Check that Exception is raised when a player attempts to play on an occupied cell.")
 
-
-
-
-
+#
+# #
+#
 class WinnerTestCase(CommonTest):
+    """ Tests winner(), which determines if either player X or player O has any of 8 total winning conditions (OR if the game is still going on/a tie.)"""
+    #
     def test_X_wins_toprow(self):
         board = self.create_board("XXX...X.O")
         self.assertEqual(winner(board), self.X, "X wins across top row.")
+    #
     def test_X_wins_diagonal(self):
         board = self.create_board("X.O.XOX.X")
         self.assertEqual(winner(board), self.X, "X wins diagonal top-left to bottom-right.")
+    #
     def test_O_wins_bottomrow(self):
         board = self.create_board("XO.X..OOO")
         self.assertEqual(winner(board), self.O, "X wins across top row.")
+    #
     def test_O_wins_diagonal(self):
-        pass
+        board = self.create_board("X.O.OOO..")
+        self.assertEqual(winner(board), self.O, "O wins diagonal bottom-left to top-right.")
+    #
+    def test_O_wins_vertical_right(self):
+        board = self.create_board("..O..O..O")
+        self.assertEqual(winner(board), self.O, "O wins vertical right row.")
+    #
     def test_no_winner_yet(self):
         board = self.create_board(".........")
         self.assertEqual(winner(board), self.EMPTY, "New board, no winner yet.")
 
+#
+# #
+#
+class TerminalTestCase(CommonTest):
+    """ Terminal() checks board and returns a Boolean True if game is over (win/no cells left) or False (if game still in progress). """
+    #
+    def test_gameover_X_won(self):
+        board = self.create_board("XXX.O.O.O")
+        self.assertTrue(terminal(board))
+    #
+    def test_gameover_O_won(self):
+        board = self.create_board(".X.OOOX.X")
+        self.assertTrue(terminal(board))
+    #
+    def test_game_start(self):
+        board = self.create_board(".........")
+        self.assertFalse(terminal(board))
+    #
+    def test_game_ongoing(self):
+        board = self.create_board("X.O.X...O")
+        self.assertFalse(terminal(board))
+    #
+    def test_game_tie(self):
+        board = self.create_board("XXOOOXXXO")
+        self.assertTrue(terminal(board))
 
+#
+# #
+#
+class UtilityTestCase(CommonTest):
+    """ Utility() returns the score of the game: +1 if X won, -1 if O won, and 0 otherwise. """
+    #
+    def test_X_won(self):
+        board = self.create_board("O.O.O.XXX")
+        self.assertEqual(utility(board), 1, "X won so utility of game is +1.")
+    #
+    def test_O_won(self):
+        board = self.create_board("X.X.X.OOO")
+        self.assertEqual(utility(board), -1, "O won so utility of game is -1.")
+    #
+    def test_tie_game(self):
+        board = self.create_board("XXOOOXXXO")
+        self.assertEqual(utility(board), 0, "Tie game so utility of game is 0.")
 
-
-class TerminalTestCase():
-    pass
-class UtilityTestCase():
-    pass
-class MinimaxTestCase():
+#
+# #
+#
+class MinimaxTestCase(CommonTest):
+    """ Minimax() returns the optimal action for the current player on the board in the form of a tuple (i,j). """
     pass
 
 
@@ -164,3 +215,6 @@ class MinimaxTestCase():
 if __name__ == "__main__":
     os.system('reset')
     unittest.main()
+"""
+
+"""

@@ -2,6 +2,7 @@
 - Course notes and projects for **CS50: Artificial Intelligence with Python**, by *Matthew James Spitzer*
 *<p><details><summary align="right">Academic Honesty Policy</summary>Note: these projects are posted for my own personal use only. Any student looking to borrow code should remember their course's Academic Honesty Policy and reconsider looking further at the source-code. It is worth more to you to learn programming the hard way than to cheat! Check out the official Python documentation, post a question of the CS50 Ed Discussion board, visit StackOverflow... or just take a break for a while!</details></p>*
   
+#### Projects
 
 № | Subject | Project | Description  | 📽️ | 💻
 -----|---------|---------|--------------|------------|------

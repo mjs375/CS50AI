@@ -12,6 +12,6 @@
 
 #### Files
 - requirements.txt: *installs pygame*
-- runner.py: *code to run the graphical interface for the game (pre-written).*
-- tictactoe.py: *my minimax AI Tic-Tac-Toe program.*
-- tests.py: *unittest-ing for the program.*
+- runner.py: *code to run the graphical interface for the game (provided with distribution code).*
+- **tictactoe.py**: *my minimax AI Tic-Tac-Toe program.*
+- **tests.py**: *unittest-ing for the program.*

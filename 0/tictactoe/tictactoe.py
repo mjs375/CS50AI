@@ -4,7 +4,7 @@ Tic Tac Toe Player
 - CS50: Intro to Artificial Intelligence w/ Python
 """
 from copy import deepcopy
-import math
+import math # math.inf / -math.inf
 import re
 
 X = "X"
@@ -153,9 +153,7 @@ def terminal(board):
                 return False # Game goes on!
     return True #--All cells are occupied, it's a tie.
 
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
 def utility(board):
     """
@@ -169,9 +167,84 @@ def utility(board):
     else: #--Tie:
         return 0
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
+
+
+
+#
+# #
+#
 def minimax(board):
     """
-    Returns the optimal action for the current player on the board.
+    Returns the optimal action for the current player on the board using minimax algorithm.
+
+    Maximizing player (X) asks, "To know what O will do,I need to imagine I'm O: O will think, 'if I take this action, what action will X play to get the best value?'... and so on, recursively!"
     """
-    raise NotImplementedError
+    #--Game is already over:
+    if terminal(board):
+        return None
+    #
+    #--Who is getting their best move?:
+    who = player(board)
+    #--Maximizing player: wants to pick |action in actions(board)| that produces the highest value of min_value(result(board, action)):
+    if who == X:
+        #-- '-∞' is our starting best, which we work up from.
+        best = -math.inf # -∞
+        #--Run through each possible action at this state:
+        for action in actions(board):
+            #--What is the highest value from the minimum values O will optimize for?
+            high = min_value(result(board, action))
+            if high > best:
+                best = high
+                best_move = action
+    #
+    elif who == O:
+        best = math.inf # ∞
+        for action in actions(board):
+            low = max_value(result(board, action))
+            if low < best:
+                best = low
+                best_move = action
+    #
+    return best_move
+
+#
+# #
+#
+def max_value(board):
+    """ Returns max utility of the current state of the board. """
+    #
+    if terminal(board):
+        return utility(board)
+    #
+    v = -math.inf
+    for action in actions(board):
+        #--Imagine what the other player will think while optimizing their game (they min while you max) [recursion]:
+        v = max(v, min_value(result(board, action)))
+    return v
+#
+# #
+#
+def min_value(board):
+    """ Returns minimum utility of the current state of the board. """
+    #
+    if terminal(board):
+        return utility(board)
+    #
+    v = math.inf
+    for action in actions(board):
+        v = min(v, max_value(result(board, action)))
+    return v
+
+
+
+
+
+
+
+
+
+
+#

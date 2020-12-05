@@ -229,7 +229,7 @@ def max_value(board):
 #
 def min_value(board):
     """ Returns minimum utility of the current state of the board. """
-    #
+    #--Game is over, just return the score:
     if terminal(board):
         return utility(board)
     #
@@ -237,12 +237,6 @@ def min_value(board):
     for action in actions(board):
         v = min(v, max_value(result(board, action)))
     return v
-
-
-
-
-
-
 
 
 

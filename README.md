@@ -4,7 +4,7 @@
 
 
 
-№ | Subject | Project | Description  | Video | Code
+№ | Subject | Project | Description  | 📽️ | Code
 -----|---------|---------|--------------|------------|------
 0a | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | | 
 0b | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)** | A program that uses Minimax to implement an AI to play optimal Tic-Tac-Toe. *Project includes a full testing suite utilizing ```unittest```.* | ⏳ | ⏳

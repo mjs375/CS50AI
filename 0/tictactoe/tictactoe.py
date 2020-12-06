@@ -208,7 +208,7 @@ def minimax(board): # really 'def alphabeta(board):'
         #--Run through each possible action at this state:
         for action in actions(board):
             #
-            #--Check is an IMMEDIATELY winning move (AI is not only unbeatable but brutal lol):
+            #--Check is an IMMEDIATELY winning move (AI will use 'insta-kill' to win faster/avoid ties):
             check = winner(result(board,action))
             if check:
                 return action

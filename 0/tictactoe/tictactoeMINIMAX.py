@@ -2,17 +2,12 @@
 Tic Tac Toe Player
 - MJ Spitzer, Dec. _ 2020
 - CS50: Intro to Artificial Intelligence w/ Python
-    -> This is the optimized Minimax + Alpha_Beta Pruning version.
+  -> This version is the plain Minimax algorithm (no alpha-beta pruning).
 """
 from copy import deepcopy
 import math # math.inf / -math.inf
 import re
 import time
-"""
-start_time = time.time()
-    ...run functions...
-print(time.time() - start_time)
-"""
 
 X = "X"
 O = "O"
@@ -182,7 +177,7 @@ def utility(board):
 #
 # #
 #
-def minimax(board): # really 'def alphabeta(board):'
+def minimax(board):
     """
     Returns the optimal action for the current player on the board using minimax algorithm.
 
@@ -196,11 +191,6 @@ def minimax(board): # really 'def alphabeta(board):'
     #
     #--Who is getting their best move?:
     who = player(board)
-
-    #--Alpha-beta Pruning (more effecient minimax):
-    alpha = -math.inf # worst possible score for X (maximizer)
-    beta = math.inf # worst possible score for O (minimizer)
-
     #--Maximizing player: wants to pick |action in actions(board)| that produces the highest value of min_value(result(board, action)):
     if who == X:
         #-- '-∞' is our starting best, which we work up from.
@@ -208,21 +198,18 @@ def minimax(board): # really 'def alphabeta(board):'
         #--Run through each possible action at this state:
         for action in actions(board):
             #--What is the highest value from the minimum values O will optimize for?
-            high = min_value(result(board, action), alpha, beta)
+            high = min_value(result(board, action))
             if high > best:
                 best = high
                 best_move = action
-
     #
     elif who == O:
         best = math.inf # ∞
         for action in actions(board):
-            low = max_value(result(board, action), alpha, beta)
+            low = max_value(result(board, action))
             if low < best:
                 best = low
                 best_move = action
-
-
     #
     print(time.time() - start_time)
     return best_move
@@ -230,7 +217,7 @@ def minimax(board): # really 'def alphabeta(board):'
 #
 # #
 #
-def max_value(board, alpha, beta):
+def max_value(board):
     """ Returns max utility of the current state of the board. """
     #
     if terminal(board):
@@ -239,16 +226,12 @@ def max_value(board, alpha, beta):
     v = -math.inf
     for action in actions(board):
         #--Imagine what the other player will think while optimizing their game (they min while you max) [recursion]:
-        v = max(v, min_value(result(board, action), alpha, beta))
-        #--Alpha-beta pruning:
-        alpha = max(alpha, v)
-        if alpha > beta: # ! ! ! ! ! ! !
-            break
+        v = max(v, min_value(result(board, action)))
     return v
 #
 # #
 #
-def min_value(board, alpha, beta):
+def min_value(board):
     """ Returns minimum utility of the current state of the board. """
     #--Game is over, just return the score:
     if terminal(board):
@@ -256,11 +239,7 @@ def min_value(board, alpha, beta):
     #
     v = math.inf
     for action in actions(board):
-        v = min(v, max_value(result(board, action), alpha, beta))
-        #--Alpha-beta pruning:
-        beta = min(beta, v)
-        if alpha > beta:
-            break
+        v = min(v, max_value(result(board, action)))
     return v
 
 

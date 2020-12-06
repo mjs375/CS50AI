@@ -173,7 +173,6 @@ def utility(board):
 
 
 
-
 #
 # #
 #
@@ -211,7 +210,7 @@ def minimax(board):
                 best = low
                 best_move = action
     #
-    print(time.time() - start_time)
+    print(time.time() - start_time) # CLOCK ENDS!
     return best_move
 
 #

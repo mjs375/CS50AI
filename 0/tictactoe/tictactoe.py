@@ -24,6 +24,7 @@ def initial_state():
     """
     Returns starting state of the board.
     """
+
     #--board: a list of 3 lists, each cell being 'X', 'O', or 'EMPTY'.
     return [[EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
@@ -178,7 +179,6 @@ def utility(board):
 
 
 
-
 #
 # #
 #
@@ -188,7 +188,7 @@ def minimax(board): # really 'def alphabeta(board):'
 
     Maximizing player (X) asks, "To know what O will do,I need to imagine I'm O: O will think, 'if I take this action, what action will X play to get the best value?'... and so on, recursively!"
     """
-    start_time = time.time() # CLOCK STARTS!
+#    start_time = time.time() # CLOCK STARTS!
 
     #--Game is already over:
     if terminal(board):
@@ -207,16 +207,29 @@ def minimax(board): # really 'def alphabeta(board):'
         best = -math.inf # -∞
         #--Run through each possible action at this state:
         for action in actions(board):
+            #
+            #--Check is an IMMEDIATELY winning move (AI is not only unbeatable but brutal lol):
+            check = winner(result(board,action))
+            if check:
+                return action
+            #
             #--What is the highest value from the minimum values O will optimize for?
             high = min_value(result(board, action), alpha, beta)
             if high > best:
                 best = high
                 best_move = action
 
+
     #
     elif who == O:
         best = math.inf # ∞
         for action in actions(board):
+            #
+            #--Check is an IMMEDIATELY winning move:
+            check = winner(result(board,action))
+            if check:
+                return action
+            #
             low = max_value(result(board, action), alpha, beta)
             if low < best:
                 best = low
@@ -224,7 +237,7 @@ def minimax(board): # really 'def alphabeta(board):'
 
 
     #
-    print(time.time() - start_time)
+#    print(time.time() - start_time)
     return best_move
 
 #

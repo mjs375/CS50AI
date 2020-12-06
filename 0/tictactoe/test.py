@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from tictactoe import player, actions, result, winner, terminal, utility, minimax
+from tictactoe import player, actions, result, winner, terminal, utility, minimax, max_value, min_value
 
 """ TESTS for Tic-Tac-Toe AI Game:
 
@@ -14,8 +14,8 @@ from tictactoe import player, actions, result, winner, terminal, utility, minima
 – MinimaxTestCase: tests optimal move finder– minimax().
 
 
-- To run a single test:
-    $ python3 test.py CommonTest.test_name
+- To run all tests:
+    $ python3 test.py
 
 """
 
@@ -194,27 +194,36 @@ class UtilityTestCase(CommonTest):
 # #
 #
 class MinimaxTestCase(CommonTest):
-    """ Minimax() returns the optimal action for the current player on the board in the form of a tuple (i,j). """
-    pass
+    """ Minimax() returns the optimal action for the current player on the board in the form of a tuple (i,j). Various tests to check if AI blocks an adversary's winning move, seizes an opportunity to win immediately, or simply tie and end the game. """
+    #
+    def test_X_win_move(self):
+        board = self.create_board("XX.O.O...")
+        self.assertEqual(minimax(board), (0,2), "X should play top-right to immediately win.")
+    #
+    def test_O_Win_move(self):
+        board = self.create_board(".X.X.X.OO")
+        self.assertEqual(minimax(board), (2,0), "O should play bottom-left to immediately win.")
+    #
+    def test_X_blocks_O_win(self):
+        board = self.create_board("OO.X...X.")
+        self.assertEqual(minimax(board), (0,2), "X should play to block O's next winning move.")
+    #
+    def test_O_wins_X_cant_sinch(self):
+        board = self.create_board("XX.OO..X.")
+        self.assertEqual(minimax(board), (1,2), "O plays to win immediately, ignoring X that would win on the next turn (if O hadn't won or otherwise blocked X).")
+    #
+    def test_tie_game_X_plays_last_move(self):
+        board = self.create_board("XOXOXXO.O")
+        self.assertEqual(minimax(board), (2,1), "X is last to go, has to play last available cell to simply tie.")
 
 
 
 
-
-
-
-
-
-
-
-
-
-#
-#
-#--Run all the above tests:
-if __name__ == "__main__":
-    os.system('reset')
-    unittest.main()
-"""
-
-"""
+# # # # # # # # # # # # # # # # #
+#                               #
+#--Run all the above tests:     #
+if __name__ == "__main__":      #
+    os.system('reset')          #
+    unittest.main()             #
+#                               #
+# # # # # # # # # # # # # # # # #

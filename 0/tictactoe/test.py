@@ -195,6 +195,8 @@ class UtilityTestCase(CommonTest):
 #
 class MinimaxTestCase(CommonTest):
     """ Minimax() returns the optimal action for the current player on the board in the form of a tuple (i,j). Various tests to check if AI blocks an adversary's winning move, seizes an opportunity to win immediately, or simply tie and end the game. """
+    # Between equally 'valuable' moves, the AI now simply chooses the first one it registers.
+    # 'Insta-kill' check was added so that the AI always chooses to win immediately rather than choose another move that results in a win (or tie!) later.
     #
     def test_X_win_move(self):
         board = self.create_board("XX.O.O...")

@@ -1,6 +1,6 @@
 """
-Tic Tac Toe Player
-- MJ Spitzer, Dec. _ 2020
+Tic Tac Toe AI-Player
+- MJ Spitzer, Dec. 5, 2020
 - CS50: Intro to Artificial Intelligence w/ Python
     -> This is the optimized Minimax + Alpha_Beta Pruning version.
 """
@@ -8,12 +8,8 @@ from copy import deepcopy
 import math # math.inf / -math.inf
 import re
 import time
-"""
-start_time = time.time()
-    ...run functions...
-print(time.time() - start_time)
-"""
 
+# Player variables / pieces-values:
 X = "X"
 O = "O"
 EMPTY = None
@@ -24,8 +20,7 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-
-    #--board: a list of 3 lists, each cell being 'X', 'O', or 'EMPTY'.
+    #--board: a 3x3 matrix, each cell being 'X', 'O', or 'EMPTY'.
     return [[EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]]

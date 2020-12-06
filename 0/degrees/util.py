@@ -5,19 +5,23 @@ class Node():
         self.action = action
 
 
+
+
+
 class StackFrontier():
+    """ StackFrontier is Depth-First Search: last-in, first-out. """
     def __init__(self):
         self.frontier = []
-
+    #
     def add(self, node):
         self.frontier.append(node)
-
+    #
     def contains_state(self, state):
         return any(node.state == state for node in self.frontier)
-
+    #
     def empty(self):
         return len(self.frontier) == 0
-
+    #
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
@@ -27,8 +31,10 @@ class StackFrontier():
             return node
 
 
-class QueueFrontier(StackFrontier):
 
+
+class QueueFrontier(StackFrontier):
+    """ QueueFrontier is Breadth-First Search: first-in, first-out. """
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")

@@ -8,7 +8,7 @@
 № | Subject | Project | Description  | 📽️ | 💻
 -----|---------|---------|--------------|------------|------
 0a | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | | 
-0b | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)** | A program that uses Minimax to implement an AI to play optimal Tic-Tac-Toe. *Project includes a full testing suite utilizing ```unittest```.* | ⏳ | [!!!](https://github.com/mjs375/CS50AI/tree/main/0/tictactoe)
+0b | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)** | A program that uses Minimax to implement an AI to play optimal Tic-Tac-Toe. *Project includes a full testing suite utilizing ```unittest```.* | ⏳ | [📂](https://github.com/mjs375/CS50AI/tree/main/0/tictactoe)
 1a | *Knowledge* | **[Knights](https://cs50.harvard.edu/ai/2020/projects/1/knights/)** | *Program that solves 'Knights & Knaves' logic puzzles.* | |
 1b | *Knowledge* | **[Minesweeper](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/)** | *An AI that plays Minesweeper optimally.* | |
 2a | *Uncertainty* | **[PageRank](https://cs50.harvard.edu/ai/2020/projects/2/pagerank/)** | *AI that ranks web pages by importance.* | |

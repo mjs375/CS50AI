@@ -152,24 +152,7 @@ def shortest_path(source, target):
                 child = Node(state=actor, parent=node, action=film) # initialize child
                 #
                 # TODO – MAKE ITS OWN FUNCTION (DRY!)
-                #
                 # Put in shortcut check: is child.state == target?
-                    #
-                if node.state == target:
-                    path = [] # path (solution): list of tuples
-                    moves = int() # linked movies
-                    peeps = int() # linked people
-                    while node.parent is not None: # when None, you're at the original person(A):
-                        moves = node.action # movie_id
-                        peeps = node.state # person_id
-                        node = node.parent
-                        path.append((moves, peeps)) # Add tuple to list (film, actor)
-                    #--Reverse the path:
-                    path.reverse()
-                    print(f"Nodes explored: {num_explored}")
-                    return path # SOLUTION!
-                #
-                #
                 #
                 frontier.add(child) # add child-node to frontier
 
@@ -233,7 +216,7 @@ if __name__ == "__main__":  #
 
 
 """
-    #--Way to look up person_id by name:
+    #--Maps a way to look up person_id by name:
 Names: {
 'kevin bacon': {'102'},
 'tom cruise': {'129'},
@@ -255,4 +238,5 @@ Movies: {
 '104257': {'title': 'A Few Good Men', 'year': '1992', 'stars': {'129', '197', '102', '193'}},
 '109830': {'title': 'Forrest Gump', 'year': '1994', 'stars': {'641', '158', '398', '705'}},
 ...}
+
 """

@@ -1,4 +1,8 @@
 ### IGNORED FILES ###
 
-# Virtual Environment
+# # # Virtual Environment
 env/
+
+# # # Py Cache:
+__pycache__/
+*.pyc

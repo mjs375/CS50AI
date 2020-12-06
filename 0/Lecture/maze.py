@@ -124,10 +124,12 @@ class Maze():
 
         # Initialize frontier to just the starting position
         start = Node(state=self.start, parent=None, action=None)
-        """Toggle Search Strategy here: """
+
+        """ Toggle Search Strategy here: """
       # frontier = QueueFrontier        #-->(BFS uses Queue: first-in, first-out)
         frontier = StackFrontier()      #-->(DFS uses Stack as data structure)
-        """ <><><> """
+        """ * * * * * * * * * * * * * *  """
+
         frontier.add(start)
 
         # Initialize an empty explored set

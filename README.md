@@ -1,14 +1,14 @@
 # CS50AI
-- Course notes and projects for **CS50: Artificial Intelligence with Python**, by *MJ Spitzer*. 
+- Course notes and projects for **CS50: Artificial Intelligence with Python**, by *MJ Spitzer*.
   - *Each project links to the course page (including project specifications and distribution code), a video demonstration of the project in action, and source-code.*
 *<p><details><summary align="right">Academic Honesty Policy</summary>Note: these projects are posted for my own personal use only. Any student looking to borrow code should remember their course's Academic Honesty Policy and reconsider looking further at the source-code. It is worth more to you to learn programming the hard way than to cheat! Check out the official Python documentation, post a question on the CS50 Ed Discussion board, visit StackOverflow... or just take a break for a while!</details></p>*
-  
+
 #### Projects
 
 № | Subject | Project | Description  | 📽️ | 💻
 -----|---------|---------|--------------|------------|------
-0a | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | | 
-0b<br>✅  | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)**| A program that uses Minimax w/ Alpha-Beta Pruning to implement an AI to play optimal Tic-Tac-Toe (can't lose, only wins or draws). *Project includes a full testing suite utilizing ```unittest```.* | ⏳ | [📂](https://github.com/mjs375/CS50AI/tree/main/0/tictactoe)
+0a | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | |
+0b<br>✅  | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)**| A program that uses Minimax w/ Alpha-Beta Pruning to implement an AI to play optimal Tic-Tac-Toe (can't lose, only wins or draws). *Project includes a full testing suite utilizing ```unittest```.* | [🎬](https://youtu.be/B2S07GSxHus) | [📂](https://github.com/mjs375/CS50AI/tree/main/0/tictactoe)
 1a | *Knowledge* | **[Knights](https://cs50.harvard.edu/ai/2020/projects/1/knights/)** | *Program that solves 'Knights & Knaves' logic puzzles.* | |
 1b | *Knowledge* | **[Minesweeper](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/)** | *An AI that plays Minesweeper optimally.* | |
 2a | *Uncertainty* | **[PageRank](https://cs50.harvard.edu/ai/2020/projects/2/pagerank/)** | *AI that ranks web pages by importance.* | |

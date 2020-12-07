@@ -5,8 +5,8 @@
   - **```1. If if did NOT rain, Harry visited Hagrid today.```**
   - **```2. Harry visited Hagrid OR Dumbledore today, but not both.```**
   - **```3. Harry visited Dumbledore today.```**
-  - *```4. Harry did not visit Hagrid.```*
-  - *```5. It rained today.```*
+    - *```4. Harry did not visit Hagrid.```*
+    - *```5. It rained today.```*
 
 - **Sentence**: *an assertion about the world in a knowledge representation language.*
 
@@ -20,3 +20,12 @@
 |--|----|
 false | true
 true | false
+
+  - **And (```∧```)**: *when two propositions are connected by ```∧```, the resulting proposition ```P∧Q``` is ```true``` only when/if __both__ P and Q are true.*
+  
+| P | Q | P ∧ Q
+|---|---|-----|
+false | false | false
+true | false
+
+

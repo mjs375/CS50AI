@@ -2,12 +2,11 @@
 
 ```Existing knowledge + logic => conclusions```
 - **Knowledge-Based Agents**: *agents that reason by operating internal representations of knowledge (e.g. people or AI!), using some sort of algorithm. Example:*
-  - ```1. If if did NOT rain, Harry visited Hagrid today.```
-  - ```2. Harry visited Hagrid OR Dumbledore today, but not both.```
-  - ```3. Harry visited Dumbledore today.```
-    - => Did it rain today? We can conclude:
-  - ```4. Harry did not visit Hagrid.```
-  - ```5. It rained today.```
+  - **```1. If if did NOT rain, Harry visited Hagrid today.```**
+  - **```2. Harry visited Hagrid OR Dumbledore today, but not both.```**
+  - **```3. Harry visited Dumbledore today.```**
+  - *```4. Harry did not visit Hagrid.```*
+  - *```5. It rained today.```*
 
 - **Sentence**: *an assertion about the world in a knowledge representation language.*
 

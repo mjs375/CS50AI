@@ -1,4 +1,4 @@
-# KNOWLEDGE: LECTURE 1
+# KNOWLEDGE
 
 ```Existing knowledge + logic => conclusions```
 - **Knowledge-Based Agents**: *agents that reason by operating internal representations of knowledge (e.g. people or AI!), using some sort of algorithm. Example (sentences 4 & 5 are inferred from sentences 1-3):*
@@ -86,7 +86,8 @@ Query: R (We want to know whether R is true or false; Does KB ⊨ R?)
   - To answer the query using the Model Checking algorith, we enumerate all possible models (P, Q, R cols); *then go through every model and check whether it is true given our __Knowledge Base__:*
     - We know P is true in our KB. *Thus we can say that the KB is false in all models where P is not true.*
     - We know that Q is false in our KB. *Thus we can say that the KB is false in all models where Q is true.*
-    - Finally, we are left with 2 models (both have P true and Q false, but either R is true or false). *Due to ```(P ∧ ¬Q) → R``` being our Knowledge Base (KB), we know that R is true when P is true and Q is false.*
+    - Finally, we are left with 2 models (both have P true and Q false, but either R is true or false). *Due to ```(P ∧ ¬Q) → R``` being our Knowledge Base (KB), we know that R is true when P is true and Q is false. 
+    - Finally, there is only 1 model where our KB is true; R is also true. By entailment, if R is true in all models where the KB is true, then ```KB ⊨ R```.*
   
 | P | Q | R | KB |
 |---|---|---|----|
@@ -99,7 +100,26 @@ true | false | true | **true**
 true | true | false | *false*
 true | true | true | *false*
 
+### Knowledge & Logic in Code
+```python
+# Create new classes, each having a name, or a symbol, representing each proposition.
+rain = Symbol("rain")  # It is raining.
+hagrid = Symbol("hagrid")  # Harry visited Hagrid
+dumbledore = Symbol("dumbledore")  # Harry visited Dumbledore
 
+# Save sentences into the KB
+knowledge = And(  # Starting from the "And" logical connective, because each proposition represents knowledge that we know to be true.
+
+    Implication(Not(rain), hagrid),  # ¬(It is raining) → (Harry visited Hagrid)
+
+    Or(hagrid, dumbledore),  # (Harry visited Hagrid) ∨ (Harry visited Dumbledore).
+
+    Not(And(hagrid, dumbledore)),  # ¬(Harry visited Hagrid ∧ Harry visited Dumbledore) i.e. Harry did not visit both Hagrid and Dumbledore.
+
+    dumbledore  # Harry visited Dumbledore. Note that while previous propositions contained multiple symbols with connectors, this is a proposition consisting of one symbol. This means that we take as a fact that, in this KB, Harry visited Dumbledore.
+    )
+
+```
 
 
 

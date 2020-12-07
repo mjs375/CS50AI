@@ -23,7 +23,7 @@ true | false
 
   - **And (```∧```)**: *when two propositions are connected by ```∧```, the resulting proposition ```P ∧ Q``` is ```true``` only when/if __both__ ```P``` and ```Q``` are true.*
   
-| P | Q | P ∧ Q
+| P | Q | P ∧ Q |
 |---|---|-----|
 false | false | false
 false | true | false
@@ -37,7 +37,7 @@ true | true | true
   - **Implication (```→```)**: *represents a structure of ```if P, then Q```. E.g. 'P: It is raining', 'Q: I'm indoors' => ```(P → Q)``` means 'If it is raining, I'm indoors.'*
     - **Antecedent**: ```P```. (P is true if Q is true)
     - **Consequent**: ```Q```. (If Q is false, then P is also false).
-| P | Q | P → Q 
+| P | Q | P → Q |
 |---|---|-------|
 false | false | true
 false | true | true

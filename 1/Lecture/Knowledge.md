@@ -69,7 +69,15 @@ true | true | true
 
 ### Inference
 ```the process of deriving new sentences from known ones```
-- **Model Checking algorithm**: *...*
+
+- **Model Checking algorithm**: *one way to infer new knowledge based on existing knowledge.*
+  - To determine if ```KB ⊨ α``` (i.e. answer the question *can we conclude that ```α``` is true based on our knowledge base?*): 
+    - 1. Enumerate all possible models
+    - 2. If in *every* model where ```KB``` is ```true```, ```α``` is ```true``` also, then KB entails α (```KB  ⊨ α```).
+
+
+
+
 
 
 

@@ -154,6 +154,22 @@ def check_all(knowledge, query, symbols, model):
         # Ensure entailment holds in both models
         return(check_all(knowledge, query, remaining, model_true) and check_all(knowledge, query, remaining, model_false))
 ```
+- Note we are only interested in models where the KB is True (if it is False, then the conditions that we know to be true are not occurring in these models, making them irrelevant).
+- ```check_all()``` function: *recursive. Picks 1 symbol, creates 2 models (true/false), then calls itself again, until all symbols have been assigned truth-values in the model, leaving ```symbols``` empty. Once it is empty (```if not symbols```), in each instance of the function (wherein each holds a different model), the function checks whether the KB is true given the model. If KB is true, the function checks whether the query is true.*
+  - Another example:
+```
+P:    Harry plays seeker.
+Q:    Oliver plays keeper.
+R:    Gryffindor wins.
+
+KB:   P Q    (P ∧ Q) → R
+  - i.e. P & Q are both true, AND that if both P & Q are true, then R is true too.
+  
+Imagine if Harry played beater instead (¬P). 
+In this case, we don't care whether Gryffindor won or not (R or ¬R),
+because we have the information in our KB that Harry played seeker, not beater.
+We are only interested in models where (in this case) both P & Q are true.
+```
 
 
 

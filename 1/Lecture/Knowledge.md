@@ -45,7 +45,7 @@ false | true | true
 true | false | false
 true | true | true
 
-  - **Biconditional (```↔```)**: *an ```implication``` in both directions. It means 'if and only if'. ```P ↔ Q``` is the same as ```P → Q``` __and__ ```Q → P``` taken together*
+  - **Biconditional (```↔```)**: *(```IFF```) an ```implication``` in both directions. It means 'if and only if'. ```P ↔ Q``` is the same as ```P → Q``` __and__ ```Q → P``` taken together. I.e. 'if it is raining, then I'm indoors' __and__ 'if I'm indoors, then it is raining.' We can infer more from this than a simple implcation.*
 
 | P | Q | P ↔ Q |
 |---|---|-------|
@@ -53,6 +53,23 @@ false | false | true
 false | true | false
 true | false | false
 true | true | true
+
+- **Model**: *an assignment of a truth value to every proposition. Propositions are statements about the world that can either be true or false. However, knowledge about the world is represented in the truth values of these propositions. How many possible models (truth-value assignments) are there?: ```2^n``` (each variable can be either T/F).*
+  - ```P```: 'It is raining' (__proposition__ that is either T/F, not real-world yet).
+  - ```Q```: 'It is Tuesday'
+    - ```{P=true,Q=false}``` (__model__ about a real scenario, with actual T/F values assigned).
+
+- **Knowledge Base (KB)**: *a set of sentences known by a __knowledge-based agent__ (a person, AI). Form = propositional logic sentences that can be used to make additional inferences about the world.*
+
+- **Entailment (```⊨```)**: *If ```α ⊨ β``` (α entails β), then in any world where α is true, β is true, too. If alpha is true, beta must also be true.*
+  - if ```α```: 'It is a Tuesday in January'
+  - ```β```: 'It is a Tuesday'
+    - we know that ```α ⊨ β```. It is true that if it is a Tuesday in January, we also know it is a Tuesday.
+    - Entailment is different from implication. Entailment is a relation that means that if all information in alpha is true, then all information in beta is true as well. Implication rather, is a logical connective between two propositions.
+
+### Inference
+```the process of deriving new sentences from known ones```
+- **Model Checking algorithm**: *...*
 
 
 

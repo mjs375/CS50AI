@@ -6,3 +6,10 @@ env/
 # # # Py Cache:
 __pycache__/
 *.pyc
+
+# # # Degree's huge .csv files:
+movies.csv
+people.csv
+stars.csv
+large/
+small/

@@ -74,7 +74,27 @@ true | true | true
   - To determine if ```KB ⊨ α``` (i.e. answer the question *can we conclude that ```α``` is true based on our knowledge base?*): 
     - 1. Enumerate all possible models
     - 2. If in *every* model where ```KB``` is ```true```, ```α``` is ```true``` also, then KB entails α (```KB  ⊨ α```).
+"""
+P   It is Tuesday.
+Q   It is raining.
+R   Harry will go for a run.
 
+KB  (P ∧ ¬Q) → R (in words, P and not Q imply R) 
+  - P (P is true) ¬Q (Q is false) 
+Query: R (We want to know whether R is true or false; Does KB ⊨ R?)
+"""
+  - To answer the query using the Model Checking algorith, we enumerate all possible models:
+  
+| P | Q | R | KB |
+|---|---|---|----|
+false | false | false |
+false | false | true | 
+false | true | false | 
+false | true | true |
+true | false | false |
+true | false | true |
+true | true | false |
+true | true | true |
 
 
 

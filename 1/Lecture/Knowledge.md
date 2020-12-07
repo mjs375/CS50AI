@@ -21,11 +21,17 @@
 false | true
 true | false
 
-  - **And (```∧```)**: *when two propositions are connected by ```∧```, the resulting proposition ```P∧Q``` is ```true``` only when/if __both__ P and Q are true.*
+  - **And (```∧```)**: *when two propositions are connected by ```∧```, the resulting proposition ```P ∧ Q``` is ```true``` only when/if __both__ ```P``` and ```Q``` are true.*
   
 | P | Q | P ∧ Q
 |---|---|-----|
 false | false | false
-true | false
+false | true | false
+true | false | false
+true | true | true
+
+  - **Or (```∨```)**: *```true``` as long as __either__ of its arguments is true. For ```P ∨ Q``` to be true, at least 1 of ```P``` or ```Q``` must be true.*
+    - **Inclusive Or**: 
+    - **Exclusive Or**: ```P ∨ Q``` is ```false``` if ```P ∧ Q``` is true. In other words, it __must__ be ```either/or```, __not__ ```both```.
 
 

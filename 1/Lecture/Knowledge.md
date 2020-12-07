@@ -1,7 +1,7 @@
 # KNOWLEDGE: LECTURE 1
 
 ```Existing knowledge + logic => conclusions```
-- **Knowledge-Based Agents**: *agents that reason by operating internal representations of knowledge (e.g. people or AI!), using some sort of algorithm. Example:*
+- **Knowledge-Based Agents**: *agents that reason by operating internal representations of knowledge (e.g. people or AI!), using some sort of algorithm. Example (sentences 4 & 5 are inferred from sentences 1-3):*
   - **```1. If if did NOT rain, Harry visited Hagrid today.```**
   - **```2. Harry visited Hagrid OR Dumbledore today, but not both.```**
   - **```3. Harry visited Dumbledore today.```**

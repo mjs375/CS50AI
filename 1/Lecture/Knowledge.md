@@ -129,7 +129,8 @@ knowledge = And(  # Starting from the "And" logical connective, because each pro
 def check_all(knowledge, query, symbols, model):
 
     # If model has an assignment for each symbol
-    # (The logic below might be a little confusing: we start with a list of symbols. The function is recursive, and every time it calls itself it pops one symbol from the symbols list and generates models from it. Thus, when the symbols list is empty, we know that we finished generating models with every possible truth assignment of symbols.)
+    # (The logic below might be a little confusing: we start with a list of symbols. The function is recursive, and every time it calls itself it pops one symbol from the symbols list and generates models from it. 
+    # Thus, when the symbols list is empty, we know that we finished generating models with every possible truth assignment of symbols.)
     if not symbols:
 
         # If knowledge base is true in model, then query must also be true

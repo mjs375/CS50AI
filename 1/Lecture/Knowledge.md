@@ -118,9 +118,41 @@ knowledge = And(  # Starting from the "And" logical connective, because each pro
 
     dumbledore  # Harry visited Dumbledore. Note that while previous propositions contained multiple symbols with connectors, this is a proposition consisting of one symbol. This means that we take as a fact that, in this KB, Harry visited Dumbledore.
     )
-
 ```
+- To run the __Model Checking algorithm__,  the following info is needed:
+  - __Knowledge Base__: used to draw inferences.
+  - A __query__: proposition that we are interested in whether it is entailed by the KB or not.
+  - __Symbols__: a list of all the symbols ('atomic propositions') used (here, ```rain```, ```hagrid```, ```dumbledore```).
+  - __Model__: an assignment of true/false values to symbols.
+- The __model checking algorithm__ itself looks like this:
+```python
+def check_all(knowledge, query, symbols, model):
 
+    # If model has an assignment for each symbol
+    # (The logic below might be a little confusing: we start with a list of symbols. The function is recursive, and every time it calls itself it pops one symbol from the symbols list and generates models from it. Thus, when the symbols list is empty, we know that we finished generating models with every possible truth assignment of symbols.)
+    if not symbols:
+
+        # If knowledge base is true in model, then query must also be true
+        if knowledge.evaluate(model):
+            return query.evaluate(model)
+        return True
+    else:
+
+        # Choose one of the remaining unused symbols
+        remaining = symbols.copy()
+        p = remaining.pop()
+
+        # Create a model where the symbol is true
+        model_true = model.copy()
+        model_true[p] = True
+
+        # Create a model where the symbol is false
+        model_false = mode.copy()
+        model_false[p] = False
+
+        # Ensure entailment holds in both models
+        return(check_all(knowledge, query, remaining, model_true) and check_all(knowledge, query, remaining, model_false))
+```
 
 
 

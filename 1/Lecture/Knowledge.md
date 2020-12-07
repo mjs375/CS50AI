@@ -80,21 +80,24 @@ Q   It is raining.
 R   Harry will go for a run.
 
 KB  (P ∧ ¬Q) → R (in words, P and not Q imply R) 
-  - P (P is true) ¬Q (Q is false) 
+  - P (P is true), ¬Q (Q is false) 
 Query: R (We want to know whether R is true or false; Does KB ⊨ R?)
 """
-  - To answer the query using the Model Checking algorith, we enumerate all possible models:
+  - To answer the query using the Model Checking algorith, we enumerate all possible models (P, Q, R cols); *then go through every model and check whether it is true given our __Knowledge Base__:*
+    - We know P is true in our KB. *Thus we can say that the KB is false in all models where P is not true.*
+    - We know that Q is false in our KB. *Thus we can say that the KB is false in all models where Q is true.*
+    - Finally, we are left with 2 models (both have P true and Q false, but either R is true or false). *Due to ```(P ∧ ¬Q) → R``` being our Knowledge Base (KB), we know that R is true when P is true and Q is false.*
   
 | P | Q | R | KB |
 |---|---|---|----|
-false | false | false |
-false | false | true | 
-false | true | false | 
-false | true | true |
-true | false | false |
-true | false | true |
-true | true | false |
-true | true | true |
+false | false | false | *false*
+false | false | true | *false*
+false | true | false | *false*
+false | true | true | *false*
+true | false | false | *false*
+true | false | true | **true**
+true | true | false | *false*
+true | true | true | *false*
 
 
 

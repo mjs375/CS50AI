@@ -45,8 +45,14 @@ false | true | true
 true | false | false
 true | true | true
 
+  - **Biconditional (```↔```)**: *an ```implication``` in both directions. It means 'if and only if'. ```P ↔ Q``` is the same as ```P → Q``` __and__ ```Q → P``` taken together*
 
-
+| P | Q | P ↔ Q |
+|---|---|-------|
+false | false | true
+false | true | false
+true | false | false
+true | true | true
 
 
 

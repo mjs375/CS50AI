@@ -231,33 +231,34 @@ def model_check(knowledge, query):
     def check_all(knowledge, query, symbols, model):
         """Checks if knowledge base entails query, given a particular model."""
 
-        # If model has an assignment for each symbol
-        if not symbols:
+        # If model has an assignment for each symbol:
+        if not symbols: #-- i.e. done checking!
 
             # If knowledge base is true in model, then query must also be true
             if knowledge.evaluate(model):
-                return query.evaluate(model)
-            return True
+                return query.evaluate(model) #--Query must be true as well
+            return True #--If Knowledge isn't true, we don't care...
         else:
 
             # Choose one of the remaining unused symbols
             remaining = symbols.copy()
             p = remaining.pop()
 
-            # Create a model where the symbol is true
+            # Create a model where the symbol is TRUE
             model_true = model.copy()
             model_true[p] = True
 
-            # Create a model where the symbol is false
+            # Create a model where the symbol is FALSE
             model_false = model.copy()
             model_false[p] = False
 
-            # Ensure entailment holds in both models
+            # Ensure entailment holds in BOTH models:
             return (check_all(knowledge, query, remaining, model_true) and
                     check_all(knowledge, query, remaining, model_false))
 
-    # Get all symbols in both knowledge and query
+    # Get ALL symbols in both knowledge and query
     symbols = set.union(knowledge.symbols(), query.symbols())
+        #--E.g. 'rain', 'hagrid', 'dumbledore'
 
-    # Check that knowledge entails query
+    # Check that knowledge entails query (recursively calls itself, checking all configurations of propositional symbols):
     return check_all(knowledge, query, symbols, dict())

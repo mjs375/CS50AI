@@ -5,14 +5,34 @@ rain = Symbol("rain")  # It is raining.
 hagrid = Symbol("hagrid")  # Harry visited Hagrid
 dumbledore = Symbol("dumbledore")  # Harry visited Dumbledore
 
+sentence = And(rain, hagrid)
+print(sentence.formula()) # => (rain ∧ hagrid)
+
 # Save sentences into the KB
 knowledge = And(  # Starting from the "And" logical connective, becasue each proposition represents knowledge that we know to be true.
-
+    #--Sentence 1:
     Implication(Not(rain), hagrid),  # ¬(It is raining) → (Harry visited Hagrid)
-
+    #--Sentence 2a:
     Or(hagrid, dumbledore),  # (Harry visited Hagrid) ∨ (Harry visited Dumbledore).
-
+    #--Sentence 2b:
     Not(And(hagrid, dumbledore)),  # ¬(Harry visited Hagrid ∧ Harry visited Dumbledore) i.e. Harry did not visit both Hagrid and Dumbledore.
-
+    #--Sentence 3:
     dumbledore  # Harry visited Dumbledore. Note that while previous propositions contained multiple symbols with connectors, this is a proposition consisting of one symbol. This means that we take as a fact that, in this KB, Harry visited Dumbledore.
     )
+
+print(knowledge.formula())
+
+
+#model_check(knowledge, query)
+print("Answer:",model_check(knowledge, rain)) #--Query: is it raining? (based on KB)
+
+
+
+"""
+    Knowledge Base:
+If it didn’t rain, Harry visited Hagrid today.
+Harry visited Hagrid or Dumbledore today, but not both.
+Harry visited Dumbledore today.
+    Conclusions?:
+
+"""

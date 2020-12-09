@@ -7,7 +7,7 @@
 
 № | Subject | Project | Description  | 📽️ | 💻
 -----|---------|---------|--------------|------------|------
-0a<br>✅  | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | [🎬](https://www.youtube.com/watch?v=i0ndOrfnHOc&feature=youtu.be)| [📂]()
+0a<br>✅  | *[Search](https://cs50.harvard.edu/ai/2020/weeks/0/)* | **[Degrees](https://cs50.harvard.edu/ai/2020/projects/0/degrees/)** | A program that determines the 'degrees of separation' between two actors (using IMDb .csv data). | [🎬](https://www.youtube.com/watch?v=i0ndOrfnHOc&feature=youtu.be)| [📂](https://github.com/mjs375/CS50AI/tree/main/0/degrees)
 0b<br>✅  | *Search* | **[Tic-Tac-Toe](https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/)**| A program that uses Minimax w/ Alpha-Beta Pruning to implement an AI to play optimal Tic-Tac-Toe (can't lose, only wins or draws). *Project includes a full testing suite utilizing ```unittest```.* | [🎬](https://youtu.be/B2S07GSxHus) | [📂](https://github.com/mjs375/CS50AI/tree/main/0/tictactoe)
 1a<br>✅  | *Knowledge* | **[Knights](https://cs50.harvard.edu/ai/2020/projects/1/knights/)** | *Program that solves 'Knights & Knaves' logic puzzles.* | [🎬](https://www.youtube.com/watch?v=_7fSfHIJoe8&feature=youtu.be) | [📂](https://github.com/mjs375/CS50AI/tree/main/1/knights)
 1b | *Knowledge* | **[Minesweeper](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/)** | *An AI that plays Minesweeper optimally.* | |

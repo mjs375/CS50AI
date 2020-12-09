@@ -1,5 +1,6 @@
 # MINIMAX AI TIC TAC TOE
 - Matthew James Spitzer
+- CS50: Introduction to Artificial Intelligence with Python
 
 - **Setup:**
    - ```$ pip3 install -r requirements.txt```
@@ -18,6 +19,6 @@
 
 
 
-### Minimax vs. Minimax + Alpha-Beta Pruning
+#### Minimax vs. Minimax + Alpha-Beta Pruning
 - ```tictactoeMINIMAX.py``` contains the base, Minimax algorithm.
 - ```tictactoe.py``` contains the Alpha-Beta optimized version.

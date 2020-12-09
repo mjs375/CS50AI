@@ -19,8 +19,5 @@
 
 
 ### Minimax vs. Minimax + Alpha-Beta Pruning
-- Running the same exact game, the following counts were generated:
-  - **Minimax** version:
-    -
-  - **Alpha-Beta Pruning** version:
-    -
+- ```tictactoeMINIMAX.py``` contains the base, Minimax algorithm.
+- ```tictactoe.py``` contains the Alpha-Beta optimized version.

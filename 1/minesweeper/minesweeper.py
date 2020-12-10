@@ -2,16 +2,18 @@ import itertools
 import random
 
 
+
+
 class Minesweeper():
     """
-    Minesweeper game representation
+    Minesweeper game representation. Handles gameplay.
     """
 
     def __init__(self, height=8, width=8, mines=8):
 
         # Set initial width, height, and number of mines
-        self.height = height
-        self.width = width
+        self.height = height # X (i, )
+        self.width = width   # Y (, j)
         self.mines = set()
 
         # Initialize an empty field with no mines
@@ -84,6 +86,12 @@ class Minesweeper():
         return self.mines_found == self.mines
 
 
+
+
+
+
+
+
 class Sentence():
     """
     Logical statement about a Minesweeper game
@@ -92,7 +100,10 @@ class Sentence():
     """
 
     def __init__(self, cells, count):
+        """ Initializes an object-instance of the class Sentence. """
+        #--subset of Cells:
         self.cells = set(cells)
+        #--Count of how many are mines:
         self.count = count
 
     def __eq__(self, other):
@@ -100,37 +111,68 @@ class Sentence():
 
     def __str__(self):
         return f"{self.cells} = {self.count}"
-
+    #
     def known_mines(self):
         """
         Returns the set of all cells in self.cells known to be mines.
         """
-        raise NotImplementedError
-
+        #-- e.g. {E, F, H} = 3  i.e. all cells are mines:
+        if self.count == len(self.cells):
+            return self.cells
+        else: #--we don't know exactly which are mines yet...
+            return set() #--?
+    #
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        raise NotImplementedError
-
+        # if cell in self.cells: # CHECK!
+        #--All cells are known absolutely to be safe:
+        if self.count == 0:
+            return self.cells
+        else: #--we don't know exactly which are safe yet...
+            return set() #--?
+    #
     def mark_mine(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            #--Remove known mine from cells subset:
+            self.cells.remove(cell)
+            #--Subtract 1 mine-count from count so Sentence logic is still correct
+            self.count -= 1
+        else:
+            pass #--Do nothing.
 
     def mark_safe(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            #--Cell is known safe, remove from subset (no count adjust):
+            self.cells.remove(cell)
+            #--No need to adjust self.count, as self.count only counts MINES
+        else:
+            pass #--No action necessary.
+
+
+
+
+
+
+
+
+
+
+
 
 
 class MinesweeperAI():
     """
-    Minesweeper game player
+    Minesweeper game player, infers moves to make based on Knowledge Base.
     """
 
     def __init__(self, height=8, width=8):
@@ -142,7 +184,7 @@ class MinesweeperAI():
         # Keep track of which cells have been clicked on
         self.moves_made = set()
 
-        # Keep track of cells known to be safe or mines
+        # Keep track of cells known (100% sure) to be safe or mines
         self.mines = set()
         self.safes = set()
 
@@ -182,7 +224,21 @@ class MinesweeperAI():
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
+        #-- 1. Put cell in moves_made set:
+        self.moves_made.add(cell)
+        #-- 2. Mark cell as safe:
+        self.mark_safe(cell)
+        #-- 3. Add new Sentence instance based on 'cell'/'count':
+            #-- 3a. Get touching cells:
+        cells = self.get_touching_cells(cell)
+        Sentence()
+
         raise NotImplementedError
+
+
+
+
+
 
     def make_safe_move(self):
         """
@@ -200,6 +256,65 @@ class MinesweeperAI():
         Returns a move to make on the Minesweeper board.
         Should choose randomly among cells that:
             1) have not already been chosen, and
-            2) are not known to be mines
+            2) are not known to be mines (but *could* be a mine)
         """
         raise NotImplementedError
+
+
+    def get_touching_cells(self, cell):
+        """
+        Returns a set of all neighboring cells for cell (i, j).
+        • • •       0,0   0,1  0,2
+        • C •       1,0   1,1  1,2
+        • • •       2,0   2,1  2,2
+                C (i,j)
+                i: vertical
+                j: horizontal
+        """
+        #--Info:
+        neighbors = set()
+        i, j = cell[0], cell[1]
+        #--Touching cells above
+        if (i - 1 >= 0) and (i < self.height): # TOP neighbor
+            neighbors.add( (i-1, j) )
+            if (j - 1 >= 0): # TOP-LEFT neighbor
+                neighbors.add( (i-1, j-1) )
+            if (j + 1 <= self.width - 1): # TOP-RIGHT neighbor
+                neighbors.add( (i-1, j+1) )
+        #--Touching cells flanking
+        if (j - 1 >= 0) and (j < self.width) :
+            neighbors.add( (i, j-1) ) # LEFT neighbor
+        if (j + 1 <= self.width - 1) and (j < self.width):
+            neighbors.add( (i, j+1) ) # RIGHT neighbor
+        #--Touching cells below
+        if (i + 1 <= self.height - 1) and ( i < self.height): # BOTTOM neighbor
+            neighbors.add( (i+1, j) )
+            if (j - 1 >= 0): # BOTTOM-LEFT neighbor
+                neighbors.add( (i+1, j-1) )
+            if (j + 1 <= self.width - 1): # BOTTOM-RIGHT neighbor
+                neighbors.add( (i+1, j+1) )
+        return neighbors #--a set of touching cells
+
+
+
+
+
+
+""" T E S T I N G :
+
+• Test: MinesweeperAI()  .get_touching_cells()
+    $ python3
+    >>> from minesweeper import *
+    >>> demo  = MinesweeperAI()
+    >>> cell = (i, j)
+    >>> demo.get_touching_cells(cell)
+    >>>    [check solution]
+
+
+"""
+
+
+
+
+
+#

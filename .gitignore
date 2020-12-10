@@ -3,6 +3,9 @@
 # # # Virtual Environment
 env/
 
+# # #
+demo.py
+
 # # # Py Cache:
 __pycache__/
 *.pyc

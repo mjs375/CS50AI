@@ -188,7 +188,7 @@ def iterate_pagerank(corpus, damping_factor):
     N = len(corpus)
     #--Initialize pagerank dictionary
     pagerank = {k:(1/N) for k in corpus.keys()}
-    print("\nIterative PAGERANKS:", pagerank, "\n")
+    #print("\nIterative PAGERANKS:", pagerank, "\n")
     #--Initialize check-switch if Pageranks still changing by more than 0.001:
     switch = True
     #

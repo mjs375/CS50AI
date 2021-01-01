@@ -251,4 +251,5 @@ def iterate_pagerank(corpus, damping_factor):
 
 
 if __name__ == "__main__":
+    os.system('clear')
     main()

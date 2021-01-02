@@ -6,10 +6,11 @@ import os
 import sys
 
 """
-GJB2 Gene probabilities calculator
+GJB2 Gene probabilities calculator.
+CS50 AI w/ Python [Harvard]
 """
 
-
+#--General population probabilities for GJB2, a gene that can cause hearing impairment:
 PROBS = {
 
     #--Unconditional probabilities for having gene (if we know nothing about parents, i.e. distribution in general population):
@@ -22,19 +23,19 @@ PROBS = {
     #--True/False if person EXPRESSES impairment based on gene nums:
     "trait": {
 
-        # Probability of trait given two copies of gene
+        #--Probability of trait given two copies of gene
         2: {
             True: 0.65, # likeliest to express with 2 copies of gene...
-            False: 0.35
+            False: 0.35 # even with 2 copies, not assured to have hearing impairment...
         },
 
-        # Probability of trait given one copy of gene
+        #--Probability of trait given one copy of gene
         1: {
             True: 0.56,
             False: 0.44
         },
 
-        # Probability of trait given no gene
+        #--Probability of trait given no gene
         0: {
             True: 0.01, # highly unlikely to express if 0 genes...
             False: 0.99
@@ -46,14 +47,19 @@ PROBS = {
 }
 
 
+
+
+
+
 def main():
 
-    # Check for proper usage
+    #--Check for proper usage
     if len(sys.argv) != 2:
         sys.exit("Usage: python heredity.py data.csv")
+    #--Load csv data into a dictionary:
     people = load_data(sys.argv[1])
 
-    # Keep track of gene and trait probabilities for each person
+    #--Keep track of gene and trait probabilities for each person (blank to start, will update each round):
     probabilities = {
         person: {
             "gene": {
@@ -70,11 +76,11 @@ def main():
             # dict = {person{...} for person in people}
     }
 
-    # Loop over all sets of people who might have the trait
+    #--Loop over all sets of people who might have the trait
     names = set(people)
     for have_trait in powerset(names):
 
-        # Check if current set of people violates known information
+        #--Check if current set of people violates known information
         fails_evidence = any(
             (people[person]["trait"] is not None and
              people[person]["trait"] != (person in have_trait))
@@ -83,17 +89,17 @@ def main():
         if fails_evidence:
             continue
 
-        # Loop over all sets of people who might have the gene
+        #--Loop over all sets of people who might have the gene
         for one_gene in powerset(names):
             for two_genes in powerset(names - one_gene):
-                # Update probabilities with new joint probability
+                #--Update probabilities with new joint probability
                 p = joint_probability(people, one_gene, two_genes, have_trait)
                 update(probabilities, one_gene, two_genes, have_trait, p)
 
-    # Ensure probabilities sum to 1
+    #--Ensure probabilities sum to 1
     normalize(probabilities)
 
-    # Print results
+    #--Print results
     for person in people:
         print(f"{person}:")
         for field in probabilities[person]:
@@ -151,19 +157,19 @@ def gene_count(person, one_gene, two_genes):
 
 def inherit(parent_genes, inherit):
     """
-
+    Returns probability of inheritance for child from specific parent.
     """
     #--No genes, can only mutate to have gene or not:
     if parent_genes == 0:
-        if inherit:
+        if inherit: #--trait is expressed:
             return PROBS["mutation"]
-        else:
+        else: #--trait is not expressed:
             return 1 - PROBS["mutation"]
-
+    #
     #--50/50 shot of passing on if 1 gene in parent:
     elif parent_genes == 1:
-        return 0.5
-
+        return 0.5 # always 50/50 %
+    #
     #--Parent has 2 genes, almost definitely will pass on (minus small mutation prob rate):
     elif parent_genes == 2:
         if inherit:
@@ -184,21 +190,25 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
-    #--Initialize probability, to be modified...
+    #--Initialize probability for this 'round' (specific situation), to be modified...
     probability = 1.0
 
     #--Loop all people in pop. data:
     for person in people:
-
+        #
         #--Get Person's number of genes
         gene_num = gene_count(person, one_gene, two_genes)
-
+        #
         #--Get whether that Person has trait exhibited or not:
-        has_trait = person in have_trait # True/False
-
+        if person in have_trait: # check list
+            has_trait = True # hearing impairment expressed
+        else:
+            has_trait = False # no hearing impairment
+        #
         #--Parent data (check, could be None):
         mom = people[person]['mother']
         dad = people[person]['father']
+
 
         #--Unconditional probability: for person IF NOT parent data:
         if dad is None and mom is None:
@@ -251,7 +261,10 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
         gene_num = gene_count(person, one_gene, two_genes)
         #
         #--Does person have trait expressed or not?
-        has_trait = person in have_trait
+        if person in have_trait:
+            has_trait = True
+        else:
+            has_trait = False
         #
         #--Update the trait & gene probability distributions:
         probabilities[person]["gene"][gene_num] += p

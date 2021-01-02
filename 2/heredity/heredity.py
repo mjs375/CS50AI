@@ -5,22 +5,26 @@ import itertools
 import os
 import sys
 
-#--GJB2 Gene probabilities DICT{}:
+"""
+GJB2 Gene probabilities calculator
+"""
+
+
 PROBS = {
 
-    #--Unconditional probabilities for having gene (if we know nothing about person's parents, i.e. distribution in general population)
+    #--Unconditional probabilities for having gene (if we know nothing about parents, i.e. distribution in general population):
     "gene": {
         2: 0.01, # 2 copies (of hearing impairment version)
         1: 0.03, # 1 copy
-        0: 0.96 # 0 copies (96% chance in gen. pop.)
+        0: 0.96 # 0 copies (96% in gen. pop.)
     },
 
-    #--Yes/No person expresses impairment based on gene
+    #--True/False if person EXPRESSES impairment based on gene nums:
     "trait": {
 
         # Probability of trait given two copies of gene
         2: {
-            True: 0.65,
+            True: 0.65, # likeliest to express with 2 copies of gene...
             False: 0.35
         },
 
@@ -32,12 +36,12 @@ PROBS = {
 
         # Probability of trait given no gene
         0: {
-            True: 0.01,
+            True: 0.01, # highly unlikely to express if 0 genes...
             False: 0.99
         }
     },
 
-    # Mutation probability (1% chance of mutating)
+    #--Mutation probability (1% chance of parent's gene mutated when passed on )
     "mutation": 0.01
 }
 
@@ -47,7 +51,6 @@ def main():
     # Check for proper usage
     if len(sys.argv) != 2:
         sys.exit("Usage: python heredity.py data.csv")
-    #--Load the population data into a people DICT{}:
     people = load_data(sys.argv[1])
 
     # Keep track of gene and trait probabilities for each person
@@ -64,7 +67,7 @@ def main():
             }
         }
         for person in people # DICT comprehension
-            # dict = {x for x in people} # except X is a big process...!
+            # dict = {person{...} for person in people}
     }
 
     # Loop over all sets of people who might have the trait
@@ -134,55 +137,46 @@ def powerset(s):
     ]
 
 
-
-
-
-
-
-
 def gene_count(person, one_gene, two_genes):
     """
-    Helper function for joint_probability.
+
     """
-    #--Get that person's num copies of gene from parameter variables:
     if person in one_gene:
-        #print(f"{person} 1 gene")
         return 1
     elif person in two_genes:
-        #print(f"{person} 2 genes")
         return 2
-    else: # zero_genes:
-        #print(f"{person} 0 genes")
+    else:
         return 0
 
-def inherit(parent_genes, if_inherited):
-    """
-    Given num of parent genes + if gene is inherited, calc probability of inheritance from this parent (mutations, &c.)
-    """
-    #--no genes, only have mutation prob:
-    if parent_genes == 0:
-        if if_inherited:
-            return PROBS['mutation'] # e.g. 0.01
-        else: # not if_inherited:
-            return 1 - PROBS['mutation'] # e.g. 0.99
 
-    #--parent has 1 gene, 50% chance of passing on:
+def inherit(parent_genes, inherit):
+    """
+
+    """
+    #--No genes, can only mutate to have gene or not:
+    if parent_genes == 0:
+        if inherit:
+            return PROBS["mutation"]
+        else:
+            return 1 - PROBS["mutation"]
+
+    #--50/50 shot of passing on if 1 gene in parent:
     elif parent_genes == 1:
         return 0.5
 
-    #--parent has 2 genes:
+    #--Parent has 2 genes, almost definitely will pass on (minus small mutation prob rate):
     elif parent_genes == 2:
-        if if_inherited:
-            return 1 - PROBS['mutation']
+        if inherit:
+            return 1 - PROBS["mutation"]
         else:
-            return PROBS['mutation']
+            return PROBS["mutation"]
+
 
 
 
 def joint_probability(people, one_gene, two_genes, have_trait):
     """
-    Compute and return a joint probability (multiple events!).
-
+    Compute and return a joint probability.
     The probability returned should be the probability that
         * everyone in set `one_gene` has one copy of the gene, and
         * everyone in set `two_genes` has two copies of the gene, and
@@ -191,87 +185,55 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone not in set` have_trait` does not have the trait.
     """
     #--Initialize probability, to be modified...
-    probability = 1
-
+    probability = 1.0
 
     #--Loop all people in pop. data:
     for person in people:
-        #--Individual person's probability:
-        #Xprobability = 1.0
-        #--Get that person's num copies of gene from parameter variables:
+
+        #--Get Person's number of genes
         gene_num = gene_count(person, one_gene, two_genes)
-        #
-        #--Get whether that person has trait exhibited or not (T/F):
-        has_trait = person in have_trait
 
+        #--Get whether that Person has trait exhibited or not:
+        has_trait = person in have_trait # True/False
 
-        #--Unconditional Probability for person IF NO parent data:
-        if people[person]['father'] is None and people[person]['mother'] is None:
-            #print(f"Unconditional Probability for {person}:",PROBS['gene'][gene_num], f"% chance has that {gene_num} genes and", PROBS['trait'][gene_num][has_trait], f"% chance  {has_trait} trait with genes.")
-            probability *= PROBS['trait'][gene_num][has_trait] * PROBS['gene'][gene_num]
+        #--Parent data (check, could be None):
+        mom = people[person]['mother']
+        dad = people[person]['father']
+
+        #--Unconditional probability: for person IF NOT parent data:
+        if dad is None and mom is None:
+            probability *= PROBS["trait"][gene_num][has_trait] * PROBS["gene"][gene_num]
         #
+        #               O R :
         #
-        #--Conditional Probability for person IF a child (parent data):
+        #--Conditional probability: for person IF parent data available (child):
         else:
-            #--Get mom & dad:
-            mom = people[person]['mother']
-            dad = people[person]['father']
-            #--Get mom & dad 's num of genes
+            #--Get mom & dad's num of genes:
             mom_genes = gene_count(mom, one_gene, two_genes)
             dad_genes = gene_count(dad, one_gene, two_genes)
 
-
-
-            #--Child has 1 way to inherit 0 copies (not mom AND not dad):
-            if gene_num == 0:
-                prob_mom = inherit(mom_genes, False)
-                prob_dad = inherit(dad_genes, False)
-                #
-                probability *= prob_mom * prob_dad
-
-            #--Child has 2 ways to inherit 1 copy (mom not dad OR dad not mom):
-            elif gene_num == 1:
-                prob_mom1 = inherit(mom_genes, False)
-                prob_mom2 = inherit(mom_genes, True)
-                prob_dad1 = inherit(dad_genes, False)
-                prob_dad2 = inherit(dad_genes, True)
-                #
-                probability *= ((prob_mom1 * prob_dad2) + (prob_mom2 * prob_dad1))
-
-            #--Child has 1 way to inherit 2 copies (mom AND dad):
-            elif gene_num == 2: # genes_num == 2:
-                prob_mom = inherit(mom_genes, True)
-                prob_dad = inherit(mom_genes, True)
-                #
-                probability *= prob_mom * prob_dad
-
             #
-            #--Probability of [child]person having the trait with their genes:
-            probability *= PROBS['trait'][gene_num][has_trait]
+            # Child gets probability from one of the following paths:
+            #
 
-        #--Add person's probability to JOINT PROB variable:
-        #probability *= Xprobability
-        #--End of loop round 'person':
-        #print(f">>> {person}'s probability:", Xprobability)
-        #
+            #--Child has 0 copies, 1 way to get (not mom AND not dad)
+            if gene_num == 0:
+                probability *= inherit(mom_genes, False) * inherit(dad_genes, False)
+
+            #--Child has 1 copy, 2 ways to get (mom not dad, OR dad not mom):
+            elif gene_num == 1:
+                probability *= inherit(mom_genes, True) * inherit(dad_genes, False) + inherit(mom_genes, False) * inherit(dad_genes, True)
+
+            #--Child has 2 copies, 1 way to get (mom AND dad):
+            elif gene_num == 2:
+                probability *= inherit(mom_genes, True) * inherit(dad_genes, True)
+
+            #--Lastly, the probability of child having the trait expressed or not with their genes:
+            probability *= PROBS["trait"][gene_num][has_trait]
     #
-    #--Calculations over, get JOINT probability:
-    #print("\n>>> JOINT Probability:", probability, "\n")
+    #
+    #print(f">>>>>>> {probability}")
     return probability
-    #raise NotImplementedError
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def update(probabilities, one_gene, two_genes, have_trait, p):
@@ -281,23 +243,22 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
     Which value for each distribution is updated depends on whether
     the person is in `have_gene` and `have_trait`, respectively.
     """
-    # p => the joint probability of this round of situations
-    #--Loop over family to update
-    for person in probabilities:
+    # p => the joint probability of this last round of situations:
 
-        #--How many genes does 'person' have? (which key to update):
+    #--Loop over family to update:
+    for person in probabilities:
+        #--How many genes does person have?
         gene_num = gene_count(person, one_gene, two_genes)
         #
-        #--Does 'person' have trait expressed? (which key to update):
+        #--Does person have trait expressed or not?
         has_trait = person in have_trait
-
-        #--Update the trait/gene probability distributions:
+        #
+        #--Update the trait & gene probability distributions:
         probabilities[person]["gene"][gene_num] += p
         probabilities[person]["trait"][has_trait] += p
 
-    #return nothing, just updating
+    # (return nothing, just an update function)
     #raise NotImplementedError
-
 
 
 def normalize(probabilities):
@@ -305,29 +266,22 @@ def normalize(probabilities):
     Update `probabilities` such that each probability distribution
     is normalized (i.e., sums to 1, with relative proportions the same).
     """
-    #print(probabilities)
-    #--Loop over family in dataset:
+    #--Loop over family in dataset one last time to normalize prob values:
     for person in probabilities:
 
-        #--Get trait/gene probs|values sums:
-        sum_trait = sum(probabilities[person]['trait'].values())
-        sum_gene = sum(probabilities[person]['gene'].values())
-
-        #-- Normalize by getting proportions (divide part by whole):
-        for trait in probabilities[person]['trait']:
-            probabilities[person]['trait'][trait] /= sum_trait
-        for gene in probabilities[person]['gene']:
-            probabilities[person]['gene'][gene] /= sum_gene
+        #--Get sums of trait/gene probabilities:
+        sum_gene = sum(probabilities[person]["gene"].values())
+        sum_trait = sum(probabilities[person]["trait"].values())
+        #
+        #--Normalize by getting proportion of each (divide part by whole to get a decimal):
+        for trait in probabilities[person]["trait"]:
+            probabilities[person]["trait"][trait] /= sum_trait
+        #
+        for gene in probabilities[person]["gene"]:
+            probabilities[person]["gene"][gene] /= sum_gene
+    #
     # return nothing, just an update
     # raise NotImplementedError
-
-
-
-
-
-
-
-
 
 
 

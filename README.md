@@ -1,6 +1,6 @@
 # CS50AI
 - Course notes and projects for **CS50: Artificial Intelligence with Python**, by *MJ Spitzer*.
-  - *Each project links to the course page (including project specifications and distribution code), a video demonstration of the project in action, and source-code.*
+  - *Each project links to the course page (including lecture notes, project specifications and distribution code), a video demonstration of the project in action, and source-code.*
 
 #### Projects
 

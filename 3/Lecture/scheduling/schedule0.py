@@ -1,8 +1,10 @@
 """
 Naive backtracking search without any heuristics or inference.
 """
-
+#--Different classes:
 VARIABLES = ["A", "B", "C", "D", "E", "F", "G"]
+
+#--Class A & B can't be on same day; &c.
 CONSTRAINTS = [
     ("A", "B"),
     ("A", "C"),
@@ -23,18 +25,18 @@ def backtrack(assignment):
 
     # Check if assignment is complete
     if len(assignment) == len(VARIABLES):
-        return assignment
+        return assignment #--DONE!
 
     # Try a new variable
     var = select_unassigned_variable(assignment)
     for value in ["Monday", "Tuesday", "Wednesday"]:
         new_assignment = assignment.copy()
         new_assignment[var] = value
-        if consistent(new_assignment):
+        if consistent(new_assignment): #--check that consistent
             result = backtrack(new_assignment)
-            if result is not None:
+            if result is not None: #--if wasn't a failure...
                 return result
-    return None
+    return None #--No possible solution to problem
 
 
 def select_unassigned_variable(assignment):
@@ -63,3 +65,6 @@ def consistent(assignment):
 
 solution = backtrack(dict())
 print(solution)
+"""
+{'A': 'Monday', 'B': 'Tuesday', 'C': 'Wednesday', 'D': 'Wednesday', 'E': 'Monday', 'F': 'Tuesday', 'G': 'Wednesday'}
+"""

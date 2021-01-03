@@ -1,4 +1,4 @@
-# Usage: $ python heredity.py [data.csv]
+# Usage: $ python heredity.py data/[family#.csv]
 
 import csv
 import itertools
@@ -145,7 +145,7 @@ def powerset(s):
 
 def gene_count(person, one_gene, two_genes):
     """
-
+    Matches person in one_gene, two_genes, or (no list) to an actual number.
     """
     if person in one_gene:
         return 1
@@ -153,8 +153,9 @@ def gene_count(person, one_gene, two_genes):
         return 2
     else:
         return 0
-
-
+#
+#
+#
 def inherit(parent_genes, inherit):
     """
     Returns probability of inheritance for child from specific parent.
@@ -170,7 +171,7 @@ def inherit(parent_genes, inherit):
     elif parent_genes == 1:
         return 0.5 # always 50/50 %
     #
-    #--Parent has 2 genes, almost definitely will pass on (minus small mutation prob rate):
+    #--Parent has 2 genes, almost definitely will pass on (minus small mutation prob. rate):
     elif parent_genes == 2:
         if inherit:
             return 1 - PROBS["mutation"]
@@ -223,7 +224,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             dad_genes = gene_count(dad, one_gene, two_genes)
 
             #
-            # Child gets probability from one of the following paths:
+            # Child gets probability from ONE of the following paths:
             #
 
             #--Child has 0 copies, 1 way to get (not mom AND not dad)
@@ -238,7 +239,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
             elif gene_num == 2:
                 probability *= inherit(mom_genes, True) * inherit(dad_genes, True)
 
-            #--Lastly, the probability of child having the trait expressed or not with their genes:
+            #--Lastly, the probability of child having the trait expressed or not with their given genes:
             probability *= PROBS["trait"][gene_num][has_trait]
     #
     #
@@ -271,7 +272,7 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
         probabilities[person]["trait"][has_trait] += p
 
     # (return nothing, just an update function)
-    #raise NotImplementedError
+    # raise NotImplementedError
 
 
 def normalize(probabilities):
@@ -297,7 +298,13 @@ def normalize(probabilities):
     # raise NotImplementedError
 
 
+# # # # # # # # # # # # # # # #
+                              #
+if __name__ == "__main__":    #
+    os.system('reset')        #
+    main()                    #
+                              #
+# # # # # # # # # # # # # # # #
 
-if __name__ == "__main__":
-    os.system('reset')
-    main()
+
+#

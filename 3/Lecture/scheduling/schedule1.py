@@ -1,5 +1,6 @@
 from constraint import *
 
+#--Create a new problem
 problem = Problem()
 
 # Add variables
@@ -8,7 +9,7 @@ problem.addVariables(
     ["Monday", "Tuesday", "Wednesday"]
 )
 
-# Add constraints
+# Add constraints (A class can't be on same day as B, &c.)
 CONSTRAINTS = [
     ("A", "B"),
     ("A", "C"),
@@ -23,6 +24,7 @@ CONSTRAINTS = [
     ("F", "G")
 ]
 for x, y in CONSTRAINTS:
+    #--Classes can't have exams on same days:
     problem.addConstraint(lambda x, y: x != y, (x, y))
 
 # Solve problem

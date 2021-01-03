@@ -1,5 +1,5 @@
 # CS50AI
-- Course notes and projects for **CS50: Artificial Intelligence with Python**, by *MJ Spitzer*. Taken in late 2020 - early 2021.
+- Course notes and projects for **[CS50: Artificial Intelligence with Python](https://cs50.harvard.edu/ai/2020/)**, by *MJ Spitzer*. Taken in late 2020 - early 2021.
   - *Each project links to the course page (including lecture notes, project specifications and distribution code), a video demonstration of the project in action, and source-code.*
 
 #### Projects

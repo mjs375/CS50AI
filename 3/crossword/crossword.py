@@ -1,3 +1,14 @@
+"""
+class Variable: represents a Variable in the crossword puzzle.
+    - 4 values: row, col, direction, length.
+class Crossword: represents the puzzle itself.
+    - requires a structure_file that defines the puzzle structure.
+    - requires a words_file that defines a list of available words.
+    - crossword.height, crossword.width, "".structure, "".words, "".variables, "".overlaps
+    - method 'neighbors' returns all variables that overlap with a given variable.
+"""
+
+
 class Variable():
 
     ACROSS = "across"

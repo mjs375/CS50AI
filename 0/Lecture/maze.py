@@ -46,6 +46,7 @@ class Maze():
         # Read file and set height and width of maze
         with open(filename) as f:
             contents = f.read()
+            print("Contents:\n",contents)
 
         # Validate start and goal
         if contents.count("A") != 1:

@@ -347,19 +347,44 @@ class CrosswordCreator():
 
     def select_unassigned_variable(self, assignment):
         """
-        Return an unassigned variable not already part of `assignment`.
-        Choose the variable with the minimum number of remaining values
-        in its domain. If there is a tie, choose the variable with the highest
-        degree. If there is a tie, any of the tied variables are acceptable
-        return values.
-        """
+        Return an unassigned variable not already part of `assignment`. Choose the variable with the MINIMUM NUMBER of REMAINING VALUES in its domain. If there is a tie, choose the variable with the highest degree. If there is a tie, any of the tied variables are acceptable return values.
+
+        # # # Random version # # #
         #--Loop all possible variables:
         for var in self.crossword.variables:
             #--Choose one (randomly) to use/try next:
             if var not in assignment:
                 #--Return an unassigned variable:
                 return var
+        """
+        # # # MINIMUM REMAINING VALUES Heuristics (most neighbors) version
 
+        #--Get all UNassigned variables (all - assigned):
+        unassigned = self.crossword.variables - assignment.keys()
+        if len(unassigned) == 1: # if only 1, just return it
+            return unassigned.pop() # return first/only set var
+
+        #--Remaining num of values in each unassigned var's domain:
+        remainder = { var:len(self.domains[var]) for var in unassigned }
+
+        #--Make a list of tuples, sort by value
+        sortedR = [ (val,var) for (var,val) in remainder.items() ]
+        sortedR.sort(key=lambda x:x[0])
+
+        ### Choose the one with the least remaining values (or...) ###
+        #--If no tie, return var w/ minimum num of remaining values in unassigned:
+        if sortedR[0][0] != sortedR[1][0]: # compare tallies
+            return sortedR[0][1] # var w/ least remaining values
+
+        #--if tied, return var w/ most degrees(2nd heuristic, most neighbors):
+        else:
+            degrees = { var:0 for var in [ sortedR[0][1], sortedR[1][1] ] }
+            for tie in [ sortedR[0][1], sortedR[1][1] ]:
+                neighbors = self.crossword.neighbors(tie)
+                degrees[tie] = len(neighbors)
+            #--Sort to find most degrees of the tied vars:
+            sortedR = sorted( (degree, var) for (var, degree) in degrees.items() )
+            return sortedR[0][1]
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -391,8 +416,11 @@ class CrosswordCreator():
 
 
                 # inferences = Inferences(assignment)
+                """ ........ """
 
                 # if inferences != failure:
+                """ ........ """
+                    # add inferences to assignment
 
 
                 #--Recursively call backtrack:
@@ -402,6 +430,9 @@ class CrosswordCreator():
                     return result
                 #--Remove {var: val} (result was a failure))
                 del asgn[var]
+                #--Remove inferences from asgn:
+                """ ........ """
+
         #
         #
         #--No satisfying assignment with vars/vals, return Failure:

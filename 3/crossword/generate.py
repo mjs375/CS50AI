@@ -378,13 +378,20 @@ class CrosswordCreator():
 
         #--if tied, return var w/ most degrees(2nd heuristic, most neighbors):
         else:
-            degrees = { var:0 for var in [ sortedR[0][1], sortedR[1][1] ] }
-            for tie in [ sortedR[0][1], sortedR[1][1] ]:
+            tied = []
+            tied.append(sortedR[0][1])
+            tied.append(sortedR[1][1])
+            degrees = { var:0 for var in tied }
+            for tie in tied:
                 neighbors = self.crossword.neighbors(tie)
                 degrees[tie] = len(neighbors)
-            #--Sort to find most degrees of the tied vars:
-            sortedR = sorted( (degree, var) for (var, degree) in degrees.items() )
+            #--Turn dict() into list of tuples (tally, variable)
+            sortedR = [ (val, var) for (var, val) in degrees.items() ]
+            #--Sort to find MOST degrees of the tied vars (rev sort):
+            sortedR.sort(key=lambda x:x[0], reverse=True)
+            #--Return var w/ least remaining values AND highest degree (most neighbors):
             return sortedR[0][1]
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -415,12 +422,15 @@ class CrosswordCreator():
             if self.consistent(asgn):
 
 
-                # inferences = Inferences(assignment)
-                """ ........ """
-
-                # if inferences != failure:
-                """ ........ """
-                    # add inferences to assignment
+                ##--inferences = Inferences(assignment)
+                #pre_inferences = copy.deepcopy(asgn)
+                #inference_check = self.ac3()
+                ##--if inferences != failure:
+                #if inference_check == True:
+                    #pass
+                    #--inferences are already added to
+                    #--the asgn (assignment) ((?))
+                    ##--add inferences to assignment
 
 
                 #--Recursively call backtrack:
@@ -429,9 +439,10 @@ class CrosswordCreator():
                 if result:
                     return result
                 #--Remove {var: val} (result was a failure))
-                del asgn[var]
-                #--Remove inferences from asgn:
-                """ ........ """
+                del asgn[var] #redundant with the below...:
+                ##--Remove inferences from asgn:
+                #asgn = pre_inferences
+
 
         #
         #

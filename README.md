@@ -12,8 +12,8 @@
 ✅ | *Knowledge 1b* | **[Minesweeper](https://cs50.harvard.edu/ai/2020/projects/1/minesweeper/)** | *An AI that plays Minesweeper optimally.* | [🎬](https://www.youtube.com/watch?v=AM_sh--btyg&feature=youtu.be)| [📂]()
 ✅ | *[Uncertainty 2a](https://cs50.harvard.edu/ai/2020/weeks/2/)* | **[PageRank](https://cs50.harvard.edu/ai/2020/projects/2/pagerank/)** | *AI that ranks web pages by importance.* | [🎬](https://www.youtube.com/watch?v=L4pPWwu0P04&feature=youtu.be)| [📂](https://github.com/mjs375/CS50AI/tree/main/2/pagerank)
 ✅ | *Uncertainty 2b* | **[Heredity](https://cs50.harvard.edu/ai/2020/projects/2/heredity/)** | *An AI that assesses the likelihood a person will have a particular genetic trait.* | [🎬](https://youtu.be/gnqhb70TuFI) | [📂](https://github.com/mjs375/CS50AI/tree/main/2/heredity)
-3a | *Optimization* | **[Crossword](https://cs50.harvard.edu/ai/2020/weeks/3/)** | *An AI that generates crossword puzzles.*
-4a | *Learning* | **[Shopping](https://cs50.harvard.edu/ai/2020/projects/4/shopping/)** | *AI predicts whether online shopping customers will complete a purchase.* |
+✅ | *Optimization 3a* | **[Crossword](https://cs50.harvard.edu/ai/2020/weeks/3/)** | *An AI that generates crossword puzzles.*
+✅ | *Learning 4a* | **[Shopping](https://cs50.harvard.edu/ai/2020/projects/4/shopping/)** | *AI predicts whether online shopping customers will complete a purchase.* |
 4b | *Learning* | **[Nim](https://cs50.harvard.edu/ai/2020/projects/4/nim/)** | *AI that teaches itself to play Nim through reinforcement learning.* |
 5a | *Neural Networks* | **[Traffic](https://cs50.harvard.edu/ai/2020/projects/5/traffic/)** | *An AI that identifies which traffic signs are in a given photograph.*
 6a | *Language* | **[Parser](https://cs50.harvard.edu/ai/2020/projects/6/parser/)** | *An AI to parse and extract noun phrases from sentences.*

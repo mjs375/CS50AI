@@ -1,6 +1,3 @@
-from termcolor import colored
-
-import decimal
 import os
 import random
 import sys
@@ -8,7 +5,7 @@ import time
 
 
 """
-Plays '21' version of 'Nim'. Players take turns removing 1, 2, or 3 sticks from the pile. Person to remove the last stick loses.
+Plays '21' version of 'Nim'. Players take turns removing 1, 2, or 3 sticks from the pile. Person to remove the last stick wins.
 """
 
 

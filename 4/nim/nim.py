@@ -20,8 +20,7 @@ class Nim():
     @classmethod
     def available_actions(cls, piles):
         """
-        Nim.available_actions(piles) takes a `piles` list as input
-        and returns all of the available actions `(i, j)` in that state.
+        Nim.available_actions(piles) takes a `piles` list as input and returns all of the available actions `(i, j)` in that state.
 
         Action `(i, j)` represents the action of removing `j` items
         from pile `i` (where piles are 0-indexed).
@@ -74,11 +73,9 @@ class NimAI():
 
     def __init__(self, alpha=0.5, epsilon=0.1):
         """
-        Initialize AI with an empty Q-learning dictionary,
-        an alpha (learning) rate, and an epsilon rate.
+        Initialize AI with an empty Q-learning dictionary, an alpha (learning) rate, and an epsilon rate.
 
-        The Q-learning dictionary maps `(state, action)`
-        pairs to a Q-value (a number).
+        The Q-learning dictionary maps `(state, action)` pairs to a Q-value (a number).
          - `state` is a tuple of remaining piles, e.g. (1, 1, 4, 4)
          - `action` is a tuple `(i, j)` for an action
         """
@@ -88,9 +85,7 @@ class NimAI():
 
     def update(self, old_state, action, new_state, reward):
         """
-        Update Q-learning model, given an old state, an action taken
-        in that state, a new resulting state, and the reward received
-        from taking that action.
+        Update Q-learning model, given an old state, an action taken in that state, a new resulting state, and the reward received from taking that action.
         """
         old = self.get_q_value(old_state, action)
         best_future = self.best_future_reward(new_state)
@@ -98,25 +93,20 @@ class NimAI():
 
     def get_q_value(self, state, action):
         """
-        Return the Q-value for the state `state` and the action `action`.
-        If no Q-value exists yet in `self.q`, return 0.
+        Return the Q-value for the state `state` and the action `action`. If no Q-value exists yet in `self.q`, return 0.
         """
         raise NotImplementedError
 
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
-        Update the Q-value for the state `state` and the action `action`
-        given the previous Q-value `old_q`, a current reward `reward`,
-        and an estiamte of future rewards `future_rewards`.
+        Update the Q-value for the state `state` and the action `action` given the previous Q-value `old_q`, a current reward `reward`, and an estiamte of future rewards `future_rewards`.
 
         Use the formula:
 
         Q(s, a) <- old value estimate
                    + alpha * (new value estimate - old value estimate)
 
-        where `old value estimate` is the previous Q-value,
-        `alpha` is the learning rate, and `new value estimate`
-        is the sum of the current reward and estimated future rewards.
+        where `old value estimate` is the previous Q-value, `alpha` is the learning rate, and `new value estimate` is the sum of the current reward and estimated future rewards.
         """
         raise NotImplementedError
 
@@ -211,9 +201,7 @@ def train(n):
 
 def play(ai, human_player=None):
     """
-    Play human game against the AI.
-    `human_player` can be set to 0 or 1 to specify whether
-    human player moves first or second.
+    Play human game against the AI. `human_player` can be set to 0 or 1 to specify whether human player moves first or second.
     """
 
     # If no player order set, choose human's order randomly

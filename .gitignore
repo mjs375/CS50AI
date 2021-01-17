@@ -23,3 +23,7 @@ bridge.png
 # # # Traffic's Image Dataset:
 gtsrb/
 gtsrb-small/
+
+shakespeare.txt
+holmes/
+federalist/

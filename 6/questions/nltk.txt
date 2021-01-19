@@ -1,0 +1,16 @@
+"""
+If having trouble downloading nltk's stopwords, e.g. SSL Certificate Verify Fail, try running the following code in a python3 interpreter (`$ python3`) in the console to manually choose which modules to download (a window will pop open).
+"""
+
+
+import nltk
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+nltk.download()
